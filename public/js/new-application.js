@@ -485,10 +485,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         // Date validations end ------
 
-        // File type validations start ------
-
-        // File type validations end ------
-
         if (errors > 0) {
             $("html, body").animate({ scrollTop: 0 }, 0);
             return false;
