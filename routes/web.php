@@ -24,7 +24,7 @@ Route::get('refresh_captcha', [App\Http\Controllers\Auth\LoginController::class,
 // Route::get('new-application', [AllotmentApplicationController::class, 'newAllotmentApplication']);
 // Route::post('submit-new-application', [AllotmentApplicationController::class, 'newAllotmentApplicationSave']);
 
-Route::controller(HrmsController::class)->name('hrms.')->group(function () {
+Route::middleware(['auth'])->controller(HrmsController::class)->name('hrms.')->group(function () {
     Route::get('new-application', 'create')->name('create');
     Route::post('new-application', 'store')->name('store');
 });

@@ -580,7 +580,7 @@
             <div class="col-md-6">
                 <h6><b>Upload Your Latest Payslip</b></h6>
                 <input type="file" id="doc_payslip" name="doc_payslip" class="form-control"
-                    aria-label="Latest Payslip">
+                    aria-label="Latest Payslip" onchange="validatePayslip()">
                 <p><small><b>Allowed Extension: pdf<br>Maximum File Size: 1 MB</b></small></p>
                 <span id="error_doc_payslip" class="text-danger"></span>
                 @error('doc_payslip')
@@ -590,7 +590,7 @@
             <div class="col-md-6">
                 <h6><b>Upload Your Scanned Signature</b></h6>
                 <input type="file" id="doc_signature" name="doc_signature" class="form-control"
-                    aria-label="Scanned Signature">
+                    aria-label="Scanned Signature" onchange="validateSignature()">
                 <p><small><b>Allowed Extension: jpg, jpeg<br>Dimensions: 140 pixels (Width) x 60 pixels (Height)<br>Maximum
                             File Size: 50 KB</b></small></p>
                 <span id="error_doc_signature" class="text-danger"></span>

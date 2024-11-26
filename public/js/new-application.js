@@ -463,8 +463,31 @@ document.addEventListener("DOMContentLoaded", function () {
         // Regex format validations end ------
 
         // Date validations start ------
+        const today = new Date();
+        const birthdate = new Date(dob.value);
+        const ageMs = Date.now() - birthdate.getTime();
+        const ageDate = new Date(ageMs);
+        const age = Math.abs(ageDate.getUTCFullYear() - 1970);
 
+        if (age < 18) {
+            error_dob.innerHTML = "Age cannot be less than 18 years";
+            errors += 1;
+        }
+        const selectedDoj = new Date(doj.value);
+        if (selectedDoj > today) {
+            error_doj.innerHTML = "Date of joining cannot be in future";
+            errors += 1;
+        }
+        const selectedDor = new Date(dor.value);
+        if (selectedDor < today) {
+            error_dor.innerHTML = "Date of retirement cannot be in past";
+            errors += 1;
+        }
         // Date validations end ------
+
+        // File type validations start ------
+
+        // File type validations end ------
 
         if (errors > 0) {
             $("html, body").animate({ scrollTop: 0 }, 0);
@@ -474,3 +497,59 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 // Onsubmit validation ends ------
+
+// File select validations start ------
+function validatePayslip() {
+    const error_doc_payslip = document.querySelector("#error_doc_payslip");
+    const payslip = document.querySelector("#doc_payslip");
+    const file = payslip.files[0];
+    const allowedExtensions = ["pdf"];
+
+    if (file) {
+        const fileExtension = file.name.split(".").pop().toLowerCase();
+        const isAllowedType = allowedExtensions.includes(fileExtension);
+
+        if (!isAllowedType) {
+            error_doc_payslip.innerHTML =
+                "Invalid file type. Please upload a PDF file.";
+            payslip.value = "";
+            return;
+        }
+        const maxSize = 1024 * 1024;
+        if (file.size > maxSize) {
+            error_doc_payslip.innerHTML =
+                "File size exceeds 1 MB. Please upload a smaller file.";
+            payslip.value = "";
+            return;
+        }
+        error_doc_payslip.innerHTML = "";
+    }
+}
+
+function validateSignature() {
+    const error_doc_signature = document.querySelector("#error_doc_signature");
+    const signature = document.querySelector("#doc_signature");
+    const file = signature.files[0];
+    const allowedExtensions = ["jpg", "jpeg", "png", "webp"];
+
+    if (file) {
+        const fileExtension = file.name.split(".").pop().toLowerCase();
+        const isAllowedType = allowedExtensions.includes(fileExtension);
+
+        if (!isAllowedType) {
+            error_doc_signature.innerHTML =
+                "Invalid file type. Please upload a JPG, JPEG, PNG, or WEBP image.";
+            signature.value = "";
+            return;
+        }
+        const maxSize = 50 * 1024;
+        if (file.size > maxSize) {
+            error_doc_signature.innerHTML =
+                "File size exceeds 50 KB. Please upload a smaller image.";
+            signature.value = "";
+            return;
+        }
+        error_doc_signature.innerHTML = "";
+    }
+}
+// File select validations end ------
