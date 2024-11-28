@@ -604,7 +604,7 @@
 
 <script src="{{ asset('/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
-<script src="{{ asset('js/new-application.js') }}"></script>
+{{-- <script src="{{ asset('js/new-application.js') }}"></script> --}}
 <script>
     $(document).ready(function() {
         $('#ddo_district').on('change', function() {
